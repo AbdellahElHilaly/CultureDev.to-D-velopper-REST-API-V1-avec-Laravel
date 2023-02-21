@@ -48,14 +48,7 @@ class ArticleController extends Controller
         ],200);
     }
 
-    public function list(){
-         $listArticle = Article::with(['user','category']);
-         $list = $listArticle->get();
-         return response()->json([
-            'mesage'=>" All Articles ",
-            'data'  => $list
-         ] , 200);
-    }
+  
 
 
 
