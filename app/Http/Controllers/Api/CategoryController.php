@@ -25,7 +25,7 @@ class CategoryController extends Controller
             if ($categories->isEmpty()) {
                 throw new \Exception("No categories found.", Response::HTTP_NOT_FOUND);
             }
-            return $this->apiResponse($categories, Response::HTTP_OK, "Categories retrieved successfully");
+            return $this->apiResponse($categories, Response::HTTP_OK, "Successfully retrieved " . $categories->count() . " Categories");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
@@ -64,6 +64,8 @@ class CategoryController extends Controller
     }
 
     public function destroy(string $id){
+
+        if($id == "deleteAll") return $this->destroyAll();
         try {
             $category = Category::findOrFail($id);
             $category->delete();
@@ -74,21 +76,20 @@ class CategoryController extends Controller
     }
 
 
-
-
-
-
-
-
-    public function destroyAll()
+    private function destroyAll()
     {
         try {
+            if (Category::count() == 0) {
+                return $this->apiResponse(null, Response::HTTP_NOT_FOUND, "No tags found to delete");
+            }
+
             Category::truncate();
-            return $this->apiResponse(NULL, Response::HTTP_NO_CONTENT, "All categories deleted successfully");
+            return $this->apiResponse(null, Response::HTTP_NO_CONTENT, "All tags deleted successfully");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
     }
+
 
 
 
