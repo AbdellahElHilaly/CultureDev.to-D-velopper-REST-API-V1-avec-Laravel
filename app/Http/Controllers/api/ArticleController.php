@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
-    
+
     public function index (){
 
-        
-        
+
+
     }
     public function create(Request $request){
         $validator =Validator::make($request->all(), [
@@ -26,7 +26,7 @@ class ArticleController extends Controller
             'content'=>'required ',
             'category_id'=>'required ',
             'user_id'=>'required '
-            
+
         ]);
         if($validator->fails()){
             return response()->json([
@@ -48,7 +48,6 @@ class ArticleController extends Controller
         ],200);
     }
 
-  
 
 
 
