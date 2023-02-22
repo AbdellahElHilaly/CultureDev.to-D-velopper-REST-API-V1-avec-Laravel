@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\Article;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -19,6 +17,7 @@ class ArticleController extends Controller
 
     }
     public function create(Request $request){
+
         $validator =Validator::make($request->all(), [
             'title'=>'required|max:255',
 
@@ -51,7 +50,7 @@ class ArticleController extends Controller
     public function update(Request $request, $id){
         $article = Article::with(['user','category'])->where('id',$id)->first();
         if($article){
-            if($article->user_id == $id){
+            // if($article->user_id == auth()->user()->id){
                 $validator =Validator::make($request->all(), [
                     'title'=>'required|max:255',
                     'description' =>'required ',
@@ -84,11 +83,17 @@ class ArticleController extends Controller
                 ],400);
             }
 
+            // }else{
+            //     return response()->json([
+            //         'message'=>'access denied',
+            //     ],400);
+            // }
+
 
         }else{
-        return response()->json([
-        'message'=>"Article Not Found",
-        ],400);
+            return response()->json([
+            'message'=>"Article Not Found",
+            ],400);
         }
 
 

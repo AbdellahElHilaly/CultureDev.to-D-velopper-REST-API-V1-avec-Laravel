@@ -16,6 +16,7 @@ class Article extends Model
         'category_id',
         'user_id'
     ];
+    
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -23,9 +24,9 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
     public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
+    {
+        return $this->hasMany(Comment::class);
+    }
 
 
 
