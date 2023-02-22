@@ -24,9 +24,6 @@ Route::get('/article/list',[ArticleController::class,'list']);
 Route::post('/article/update/{id}',[ArticleController::class,'update']);
 Route::delete('/article/delete/{id}',[ArticleController::class,'delete']);
 
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('tags', TagController::class);
 
-Route::apiResource('categories' , CategoryController::class);
-Route::delete('categories', [CategoryController::class, 'destroyAll']);
-
-Route::apiResource('tags' , TagController::class);
-Route::delete('tags', [TagController::class, 'destroyAll']);

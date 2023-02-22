@@ -22,7 +22,7 @@ class TagController extends Controller
             if ($tags->isEmpty()) {
                 throw new \Exception("No tags found.", Response::HTTP_NOT_FOUND);
             }
-            return $this->apiResponse($tags, Response::HTTP_OK, "Tags retrieved successfully");
+            return $this->apiResponse($tags, Response::HTTP_OK, "Successfully retrieved " . $tags->count() . " Tags");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
@@ -63,6 +63,7 @@ class TagController extends Controller
 
     public function destroy(string $id)
     {
+        if($id == "deleteAll") return $this->destroyAll();
         try {
             $tag = Tag::findOrFail($id);
             $tag->delete();
@@ -72,13 +73,18 @@ class TagController extends Controller
         }
     }
 
-    public function destroyAll()
+    private function destroyAll()
     {
         try {
+            if (Tag::count() == 0) {
+                return $this->apiResponse(null, Response::HTTP_NOT_FOUND, "No tags found to delete");
+            }
+
             Tag::truncate();
             return $this->apiResponse(null, Response::HTTP_NO_CONTENT, "All tags deleted successfully");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
     }
+
 }
