@@ -2,7 +2,7 @@
 # CultureDev.to™ | Développer REST API V1 avec Laravel
 Développer une REST API de blog CultureDev.to™ en utilisant Laravel
 
-***squade* : abdellah , iman , hicham , marouan** 
+***squad* : abdellah , iman , hicham , marouan** 
 ## jirra link : 
 https://abdellah3youcode.atlassian.net/jira/software/projects/CDR/boards/7
 -   PHP
