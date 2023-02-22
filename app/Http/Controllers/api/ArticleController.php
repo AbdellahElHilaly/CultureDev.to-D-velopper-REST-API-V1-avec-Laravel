@@ -48,6 +48,74 @@ class ArticleController extends Controller
         ],200);
     }
 
+    public function update(Request $request, $id){
+        $article = Article::with(['user','category'])->where('id',$id)->first();
+        if($article){
+            if($article->user_id == $id){
+                $validator =Validator::make($request->all(), [
+                    'title'=>'required|max:255',
+                    'description' =>'required ',
+                    'content'=>'required ',
+                    'category_id'=>'required ',
+                ]);
+                if($validator->fails()){
+                    return response()->json([
+                        'message' => 'validation errors',
+                        'errors' =>$validator->messages()
+                    ],422);
+                }
+                $article ->update([
+                    'title'=>$request->title,
+                    'description'=>$request->description,
+                    'content'=>$request->content,
+                    'category_id'=>$request->category_id,
+                ]);
+                return response()->json([
+                    'message'=>'Article update Successfuly',
+                    'data'=>$article
+                ],200);
+
+
+
+
+            }else{
+                return response()->json([
+                    'message'=>'access denied',
+                ],400);
+            }
+                
+
+        }else{
+        return response()->json([
+        'message'=>"Article Not Found",
+        ],400);
+        }
+
+       
+
+        
+
+        
+        
+    }
+    public function delete($id){    
+
+        $article = Article::with(['user','category'])->where('id',$id)->first();
+        if($article){
+            $article->delete();
+            return response()->json([
+                'message' => 'article deleted successfuly',
+                // 'data'=>$article
+            ],200);
+        }else{
+            return response()->json([
+                
+                'message'=>'No Articles Found'
+            ],400);
+        }
+
+    }
+
   
 
 
