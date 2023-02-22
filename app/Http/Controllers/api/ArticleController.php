@@ -50,7 +50,7 @@ class ArticleController extends Controller
     public function update(Request $request, $id){
         $article = Article::with(['user','category'])->where('id',$id)->first();
         if($article){
-            // if($article->user_id == auth()->user()->id){
+            // if($article->user_id == auth()->user()->id){ for update just her article
                 $validator =Validator::make($request->all(), [
                     'title'=>'required|max:255',
                     'description' =>'required ',
