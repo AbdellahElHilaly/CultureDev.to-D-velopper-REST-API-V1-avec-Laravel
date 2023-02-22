@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::get('/articles',[ArticleController::class,'index']);
 Route::post('/article/create',[ArticleController::class,'create']);
 Route::get('/article/list',[ArticleController::class,'list']);
 Route::post('/article/update/{id}',[ArticleController::class,'update']);

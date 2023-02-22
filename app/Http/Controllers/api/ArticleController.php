@@ -14,8 +14,12 @@ class ArticleController extends Controller
 {
     
     public function index (){
-
-        
+        $listArticle = Article::with(['user','category']);
+         $list = $listArticle->get();
+         return response()->json([
+            'mesage'=>" All Articles ",
+            'data'  => $list
+         ] , 200);
         
     }
     public function create(Request $request){
@@ -109,11 +113,14 @@ class ArticleController extends Controller
             ],200);
         }else{
             return response()->json([
-                
+
                 'message'=>'No Articles Found'
             ],400);
         }
 
+    }
+    public function list(){
+        // $listAll = Articles::with();
     }
 
   
