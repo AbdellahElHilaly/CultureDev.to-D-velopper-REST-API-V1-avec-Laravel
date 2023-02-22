@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
-    
+
     public function index (){
 
-        
-        
+
+
     }
     public function create(Request $request){
         $validator =Validator::make($request->all(), [
@@ -26,7 +26,7 @@ class ArticleController extends Controller
             'content'=>'required ',
             'category_id'=>'required ',
             'user_id'=>'required '
-            
+
         ]);
         if($validator->fails()){
             return response()->json([
@@ -83,7 +83,7 @@ class ArticleController extends Controller
                     'message'=>'access denied',
                 ],400);
             }
-                
+
 
         }else{
         return response()->json([
@@ -91,14 +91,14 @@ class ArticleController extends Controller
         ],400);
         }
 
-       
 
-        
 
-        
-        
+
+
+
+
     }
-    public function delete($id){    
+    public function delete($id){
 
         $article = Article::with(['user','category'])->where('id',$id)->first();
         if($article){
@@ -109,14 +109,14 @@ class ArticleController extends Controller
             ],200);
         }else{
             return response()->json([
-                
+
                 'message'=>'No Articles Found'
             ],400);
         }
 
     }
 
-  
+
 
 
 
