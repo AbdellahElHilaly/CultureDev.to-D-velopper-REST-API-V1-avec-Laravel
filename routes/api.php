@@ -22,9 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 Route::controller(EditProfileController::class)->group( function() {
-    Route::post('register', 'register');
-    Route::post('login','login');
-    Route::post('logout','logout');
     Route::get('edit','edit');
     Route::post('update','update');
     });
