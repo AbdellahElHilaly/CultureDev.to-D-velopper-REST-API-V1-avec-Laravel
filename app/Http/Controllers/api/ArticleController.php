@@ -51,7 +51,6 @@ class ArticleController extends Controller
             'data'=>$article
         ],200);
     }
-
     public function update(Request $request, $id){
         $article = Article::with(['user','category'])->where('id',$id)->first();
         if($article){
@@ -119,8 +118,15 @@ class ArticleController extends Controller
         }
 
     }
-    public function list(){
-        // $listAll = Articles::with();
+    public function list(Request $request){
+        $listAll  = Article::with(['user','category']);
+        if($request->keyword){
+            $listAll->where('name','LIKE','%'.$request->keyword.'%');
+
+        }
+        $filterByCategory= $listAll->get
+      
+
     }
 
   

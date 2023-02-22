@@ -26,3 +26,4 @@ Route::post('/article/create',[ArticleController::class,'create']);
 Route::get('/article/list',[ArticleController::class,'list']);
 Route::post('/article/update/{id}',[ArticleController::class,'update']);
 Route::delete('/article/delete/{id}',[ArticleController::class,'delete']);
+Route::get('/article/list',[ArticleController::class,'list']);
