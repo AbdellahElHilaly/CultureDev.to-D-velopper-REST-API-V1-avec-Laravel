@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EditProfileController;
+// use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
 });
+Route::controller(EditProfileController::class)->group( function() {
+    Route::post('register', 'register');
+    Route::post('login','login');
+    Route::post('logout','logout');
+    Route::get('edit','edit');
+    Route::post('update','update');
+    });
+       
+   
