@@ -87,13 +87,11 @@ class ArticleController extends Controller
             'message'=>"Article Not Found",
             ],400);
         }
-
-
-
-
-
-
     }
+
+
+
+
     public function delete($id){
 
         $article = Article::with(['user','category'])->where('id',$id)->first();
