@@ -29,8 +29,9 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('tags', TagController::class);
 
 
-    Route::controller(CommentController::class)->group( function() {
+        Route::controller(CommentController::class)->group( function() {
         Route::post('storecomment', 'StoreComment');                                                                                  
+        Route::get('findcomment/{id}', 'FindComment');                                                                                  
         Route::delete('deletecomment/{id}', 'DeleteComment');                                           
      });
     

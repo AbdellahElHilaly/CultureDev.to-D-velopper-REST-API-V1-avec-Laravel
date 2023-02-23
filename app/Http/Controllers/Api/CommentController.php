@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use App\Http\Resources\CommentResource;
 use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
@@ -16,7 +17,7 @@ class CommentController extends Controller
        $request->validate([
         'body'=>'required', 
        ]);
-        // $id=Auth::user()->id;
+        $id=Auth::user()->id;
          $body = Comment::create([
                'user_id'=>$id,
                'article_id'=>$request->article_id,
@@ -28,8 +29,16 @@ class CommentController extends Controller
             'comment'=>$body,
         ]);
     }
-    public function FindComment(){
+    public function FindComment($id){
+        // $categories = CategoryResource::collection(Category::all());
 
+        // $comment = CommentResource::collection(Comment::find($id));
+        $comment = new CommentResource(Comment::find($id));
+
+     return response()->json([
+      'status'=> 'true',
+      'comment'=> $comment,
+     ]);
     }
 
     public function DeleteComment($id){
