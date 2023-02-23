@@ -21,10 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-Route::controller(EditProfileController::class)->group( function() {
+
+    Route::controller(CommentController::class)->group( function() {
+        Route::post('storecomment', 'StoreComment');                                           
+       //  Route::get('getarticle/{id}','ShowArticle');                                         
+        Route::post('deletecomment/{id}', 'DeleteComment');                                           
+     });
     
-    Route::get('edit','edit');
-    Route::post('update','update');
-    });
+
        
    
