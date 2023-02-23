@@ -42,8 +42,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //relationShip
+
+    //relationShips
     public function articles(){
         return $this->hasMany(Article::class);
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+    public function tags()
+    {
+        return $this->hasMany(Tags::class);
+    }
+
 }
