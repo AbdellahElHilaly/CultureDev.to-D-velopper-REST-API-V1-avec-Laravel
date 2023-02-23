@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('display_name');
             $table->string('description');
-            $table->string('allowed_route');
+            $table->string('allowed_route')->nullable();
             $table->timestamps();
         });
     }

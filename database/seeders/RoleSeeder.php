@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
     {
         // User Roles
         $adminRole  = Role::create(['name' => 'admin' , 'display_name' => 'Administration' , 'description' => 'Administrator' , 'allowed_route' => 'admin']);
-        $authorRole = Role::create(['name' => 'author' , 'display_name' => 'Supervisor' , 'description' => 'Author' , 'allowed_route' => 'admin']);
-        $guestRole  = Role::create(['name' => 'guest' , 'display_name' => 'Customer' , 'description' => 'Guest' , 'allowed_route' => null]);
+        $authorRole = Role::create(['name' => 'author' , 'display_name' => 'Author' , 'description' => 'Author' , 'allowed_route' => 'admin']);
+        $guestRole  = Role::create(['name' => 'guest' , 'display_name' => 'Customer' , 'description' => 'Customer' , 'allowed_route' => null]);
     }
 }
