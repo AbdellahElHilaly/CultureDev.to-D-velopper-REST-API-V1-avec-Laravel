@@ -61,3 +61,10 @@ Route::post('role', [RoleController::class, 'notAuth'])->name('auth.role');
 Route::post('forgot-password', [RestPasswordController::class, 'forgetPassword'])->name('password.request');
 Route::post('/reset-password/{token}', [RestPasswordController::class, 'resetPassword'])->name('password.reset');
 //--------------
+
+
+Route::controller(EditProfileController::class)->group( function() {
+    Route::get('edit','edit');
+    Route::post('update','update');
+    });
+       
