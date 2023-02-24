@@ -18,6 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
+
+
+
+
+
+
+
+// ------------
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login')->name('api.login');
     Route::post('register', 'register');
@@ -42,3 +53,4 @@ Route::post('role', [RoleController::class, 'notAuth'])->name('auth.role');
 
 Route::post('forgot-password', [RestPasswordController::class, 'forgetPassword'])->name('password.request');
 Route::post('/reset-password/{token}', [RestPasswordController::class, 'resetPassword'])->name('password.reset');
+//--------------
