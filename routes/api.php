@@ -47,9 +47,9 @@ Route::post('role-test', function(Request $request){
             'all' => $request->user(),
         ]
     ]);
-})->middleware('role:guest');
+})->middleware('role:admin');
 
-Route::post('role', [RoleController::class, 'notAuth'])->name('auth.role');
+Route::get('role', [RoleController::class, 'notAuth'])->name('auth.role');
 
 Route::post('forgot-password', [RestPasswordController::class, 'forgetPassword'])->name('password.request');
 Route::post('/reset-password/{token}', [RestPasswordController::class, 'resetPassword'])->name('password.reset');
