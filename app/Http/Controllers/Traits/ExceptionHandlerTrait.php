@@ -33,13 +33,18 @@ trait ExceptionHandlerTrait
     {
         $modelName = $this->getModelName();
 
+
         if ($e instanceof ModelNotFoundException) {
             return $this->apiResponse(null, Response::HTTP_NOT_FOUND, "$modelName not found");
         } else if ($e instanceof ValidationException) {
             return $this->apiResponse(null, Response::HTTP_UNPROCESSABLE_ENTITY, $e->getMessage());
         } else if ($e instanceof QueryException) {
             if ($e->errorInfo[1] == 1062) {
-                return $this->apiResponse(null, Response::HTTP_CONFLICT, "Database error : $modelName already exists");
+                if (strpos($e->getMessage(), 'Duplicate entry') !== false && strpos($e->getMessage(), 'for key \'article_tag_article_id_tag_id_unique\'') !== false) {
+                    return $this->apiResponse(null, Response::HTTP_CONFLICT, "Database error: Duplicate tags not allowed for the same $modelName");
+                } else {
+                    return $this->apiResponse(null, Response::HTTP_CONFLICT, "Database error : $modelName already exists");
+                }
             } else if ($e->errorInfo[1] == 2002) {
                 return $this->apiResponse(null, Response::HTTP_INTERNAL_SERVER_ERROR, "Unable to connect to database");
             } else if ($e->errorInfo[1] == 1701) {
@@ -51,4 +56,5 @@ trait ExceptionHandlerTrait
 
         return $this->apiResponse(null, Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
     }
+
 }

@@ -46,7 +46,7 @@ class CategoryController extends Controller
     public function show(string $id){
         try {
             $category = Category::findOrFail($id);
-            return $this->apiResponse(new CategoryResource($category));
+            return $this->apiResponse(new CategoryResource($category), Response::HTTP_OK, "Category retrieved successfully");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }

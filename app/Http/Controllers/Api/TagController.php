@@ -43,7 +43,7 @@ class TagController extends Controller
     {
         try {
             $category = Tag::findOrFail($id);
-            return $this->apiResponse(new TagResource($category));
+            return $this->apiResponse(new TagResource($category), Response::HTTP_OK, "Tag retrieved successfully");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
@@ -86,5 +86,7 @@ class TagController extends Controller
             return $this->handleException($e);
         }
     }
+
+
 
 }
