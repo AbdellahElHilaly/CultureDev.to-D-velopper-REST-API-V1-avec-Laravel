@@ -13,7 +13,7 @@ class ArticleController extends Controller
 
     public function index (){
 
-
+        
 
     }
     public function create(Request $request){

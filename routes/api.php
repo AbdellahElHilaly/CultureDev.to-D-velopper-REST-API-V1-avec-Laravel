@@ -28,11 +28,11 @@ Route::delete('/article/delete/{id}',[ArticleController::class,'delete']);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('tags', TagController::class);
 
-
-        Route::controller(CommentController::class)->group( function() {
-        Route::post('storecomment', 'StoreComment');
-        Route::get('findcomment/{id}', 'FindComment');
-        Route::delete('deletecomment/{id}', 'DeleteComment');
+Route::controller(CommentController::class)->group( function() {
+    Route::get('all', 'index');
+    Route::post('storecomment', 'StoreComment');
+    Route::get('findcomment/{id}', 'FindComment');
+    Route::delete('deletecomment/{id}', 'DeleteComment');
 });
 
 
