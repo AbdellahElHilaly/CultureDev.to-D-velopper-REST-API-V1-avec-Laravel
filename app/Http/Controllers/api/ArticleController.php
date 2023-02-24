@@ -51,10 +51,11 @@ class ArticleController extends Controller
     }
 
 
-    public function show(string $id){
+    public function show(string $id)
+    {
         try {
-            $Article = Article::findOrFail($id);
-            return $this->apiResponse(new ArticleResource($Article), Response::HTTP_OK, "Article retrieved successfully");
+            $article = Article::with('category', 'comments.user')->findOrFail($id);
+            return $this->apiResponse(new ArticleResource($article), Response::HTTP_OK, "Article retrieved successfully");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
@@ -103,27 +104,32 @@ class ArticleController extends Controller
     {
         $category_id = $request->get('category_id');
         $tags_id = $request->get('tags_id');
-        try{
+
+        try {
             $query = Article::query();
 
-        if ($category_id) {
-            $query->where('category_id', $category_id);
-        }
+            if ($category_id) {
+                $query->where('category_id', $category_id);
+            }
 
-        if ($tags_id) {
-            $query->whereHas('tags', function ($q) use ($tags_id) {
-                $q->whereIn('tags.id', $tags_id);
-            });
-        }
+            if ($tags_id) {
+                $query->whereHas('tags', function ($q) use ($tags_id) {
+                    $q->whereIn('id', $tags_id);
+                });
+            }
 
-        $articles = $query->get();
+            $articles = $query->with('comments')->get();
 
-        return ArticleResource::collection($articles);
+            return ArticleResource::collection($articles)
+                ->map(function ($article) {
+                    $article->comment = $article->comment->pluck('body', 'user_id');
+                    return $article;
+                });
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
-
     }
+
 
 
 

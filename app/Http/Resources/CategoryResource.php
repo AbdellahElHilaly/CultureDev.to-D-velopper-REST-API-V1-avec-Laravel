@@ -8,13 +8,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class CategoryResource extends JsonResource
 {
 
-    public function toArray(Request $request): array
+    public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'user_id' => $this->user_id,
-            'last_user_updated_id' => $this->last_user_updated_id,
+
+            'title' => $this->name,
+            'created_by' => $this->user->name,
+            'updated_by' => $this->lastUserUpdated->name,
         ];
     }
 }

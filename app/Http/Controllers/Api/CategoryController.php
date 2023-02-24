@@ -19,9 +19,10 @@ class CategoryController extends Controller
 {
     use ExceptionHandlerTrait;
     use ApiResponceTrait;
-    public function index(){
+    public function index()
+    {
         try {
-            $categories = CategoryResource::collection(Category::all());
+            $categories = CategoryResource::collection(Category::with('user', 'lastUserUpdated')->get());
             if ($categories->isEmpty()) {
                 throw new \Exception("No categories found.", Response::HTTP_NOT_FOUND);
             }
@@ -30,6 +31,7 @@ class CategoryController extends Controller
             return $this->handleException($e);
         }
     }
+
 
 
     public function store(CategoryRequest $request){
@@ -45,12 +47,13 @@ class CategoryController extends Controller
 
     public function show(string $id){
         try {
-            $category = Category::findOrFail($id);
+            $category = Category::with(['user', 'lastUserUpdated'])->findOrFail($id);
             return $this->apiResponse(new CategoryResource($category), Response::HTTP_OK, "Category retrieved successfully");
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
     }
+
 
     public function update(CategoryRequest $request, string $id){
         try {

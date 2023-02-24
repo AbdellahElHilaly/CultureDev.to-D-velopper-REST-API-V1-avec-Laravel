@@ -12,12 +12,11 @@ class CommentResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray($request)
     {
         return [
-            'user_id'=>$this->user->name,
-            'article_id'=>$this->article->title,
-            'body'=>$this->body,
+            'user' => $this->user->name,
+            'comment' => $this->body,
         ];
     }
 }
