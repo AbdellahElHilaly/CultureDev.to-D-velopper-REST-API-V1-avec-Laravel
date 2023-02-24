@@ -44,7 +44,7 @@ class ArticleController extends Controller
         return response()->json([
             'message'=>'Article Seved Successfuly',
             'data'=>$article
-        ],200);
+        ],201);
     }
 
     public function update(Request $request, $id){
