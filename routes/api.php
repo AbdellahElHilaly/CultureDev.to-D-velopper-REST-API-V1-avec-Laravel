@@ -30,3 +30,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
 });
+
+Route::controller(EditProfileController::class)->group( function() {
+    Route::get('edit','edit');
+    Route::post('update','update');
+    });
+    
