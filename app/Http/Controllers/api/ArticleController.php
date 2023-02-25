@@ -118,16 +118,8 @@ class ArticleController extends Controller
         }
 
     }
-    public function list(Request $request){
-        $listAll  = Article::with(['user','category']);
-        if($request->keyword){
-            $listAll->where('name','LIKE','%'.$request->keyword.'%');
-
-        }
-        $filterByCategory= $listAll->get
-      
-
-    }
+    
+    
 
   
 
