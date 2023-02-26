@@ -1,24 +1,18 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Auth\EditProfileController;
+// use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-// use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\TagController;
+use App\Http\Controllers\Api\ArticleController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -55,4 +49,28 @@ Route::controller(EditProfileController::class)->group( function() {
     Route::get('edit','edit');
     Route::post('update','update');
     });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+
+
+
+
+Route::apiResource('articles', ArticleController::class);
+Route::post('articles/filter', [ArticleController::class, 'filter']);
+
+
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('tags', TagController::class);
+
+Route::controller(CommentController::class)->group( function() {
+    Route::get('all', 'index');
+    Route::post('storecomment', 'StoreComment');
+    Route::get('findcomment/{id}', 'FindComment');
+    Route::delete('deletecomment/{id}', 'DeleteComment');
+});
+
+
+
 
