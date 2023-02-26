@@ -31,7 +31,6 @@ class AuthController extends Controller
                 'data' => $request->validate(),
             ], 401);
         }
- 
         $user = Auth::user();
         return response()->json([
                 'status' => 'success',

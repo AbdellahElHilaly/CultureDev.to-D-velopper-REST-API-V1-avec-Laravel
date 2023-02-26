@@ -43,7 +43,7 @@ Route::post('role-test', function(Request $request){
             'all' => $request->user(),
         ]
     ]);
-})->middleware('role:author');
+})->middleware('role:guest');
 
 Route::get('role', [RoleController::class, 'notAuth'])->name('auth.role');
 

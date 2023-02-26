@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'api',
-        'passwords' => 'users',
-    ],
+    // 'defaults' => [
+    //     'guard' => 'api',
+    //     'passwords' => 'users',
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -35,17 +35,32 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'api' => [
-                   'driver' => 'jwt',
-                   'provider' => 'users',
-        ],
+    // 'guards' => [
+    //     'web' => [
+    //         'driver' => 'session',
+    //         'provider' => 'users',
+    //     ],
+    //     'api' => [
+    //                'driver' => 'jwt',
+    //                'provider' => 'users',
+    //     ],
+    // ],
+
+    'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
     ],
 
+
+    'guards' => [
+        // ...
+
+        'api' => [
+                'driver' => 'jwt',
+                'provider' => 'users',
+        ],
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | User Providers
